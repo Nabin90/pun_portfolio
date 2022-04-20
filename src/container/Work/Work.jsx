@@ -24,12 +24,23 @@ const Work = () => {
   }, []);
 
   const handleWorkFilter = (item) => {
+    setActiveFilter(item);
+    setAnimateCard([{ y: 100, opacity: 0 }]);
 
+    setTimeout(() => {
+      setAnimateCard([{ y: 0, opacity: 1 }]);
+
+      if(item === 'All') {
+        setFilterWork(works);
+      } else {
+        setFilterWork(works.filter((work) => work.tags.includes(item)));
+      }
+    }, 500);
   }
 
   return (
     <>
-      <h2 className="head-text">My Creative <span>Portfolio</span> <br />section</h2>
+      <h2 className="head-text">My <span>Portfolio</span> section</h2>
 
       <div className="app__work-filter">
         {['UI/UX', 'Web App', 'Mobile App', 'React JS', 'All'].map((item, index) => (
